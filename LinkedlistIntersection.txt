@@ -1,0 +1,68 @@
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        
+        if(headA==null||headB==null)
+            return null;
+        
+       ListNode temp1=headA;
+        int count1=1;
+        
+        while(temp1.next!=null)
+        {
+            temp1=temp1.next;
+            count1++;
+        }
+        
+        ListNode temp2=headB;
+        int count2=1;
+        
+        while(temp2.next!=null)
+        {
+            temp2=temp2.next;
+            count2++;
+        }
+        
+        ListNode morehead =count1>count2? headA:headB;
+        
+        
+        
+        ListNode lesshead =count1<count2? headA:headB;
+        
+        
+
+        
+        int d=Math.abs(count1-count2);
+        
+        if(d>0)
+        {
+            int count=0;
+        while(count<d)
+        {
+            morehead=morehead.next;
+            count++;
+        }
+        
+        while(morehead!=lesshead )
+        {
+            morehead=morehead.next;
+            lesshead=lesshead.next;
+        }
+             return morehead;
+        }
+        
+        else
+        {
+            while(headA!=headB)
+            {
+                 headA=headA.next;
+                 headB=headB.next;
+            }
+            
+            return headA;
+           
+        }
+      
+    
+        
+    }
+}

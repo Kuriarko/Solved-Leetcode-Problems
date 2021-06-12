@@ -1,0 +1,43 @@
+// Java Program to rotate a Linked List
+
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        
+        if(head == null || head.next == null)
+            return head;
+        
+        ListNode curr = head;
+         ListNode dummy = head;
+        int len = 1;
+        
+        
+        while(curr.next != null)
+        {
+            curr = curr.next;
+            len++;
+        }
+        
+        curr.next = head;
+        
+        if(k>=len)
+            k= k%len;
+        
+        int travel = len - k;
+        int count = 1;
+        
+        while(count < travel)
+        {
+            dummy = dummy.next;
+            count++;
+        }
+        
+        ListNode newhead = dummy.next;
+        dummy.next = null;
+        
+        
+        return newhead;
+        
+        
+    }
+}

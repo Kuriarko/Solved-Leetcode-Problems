@@ -1,0 +1,74 @@
+class Solution {
+   public ListNode reverseList(ListNode second)
+    {
+       ListNode prev=null;
+       ListNode next=null;
+       
+        ListNode curr=second;
+       while(curr!=null)
+       {
+           next=curr.next;
+           curr.next=prev;
+           prev=curr;
+           curr=next;
+       }
+       
+       return prev;
+       
+    }
+    public boolean isPalindrome(ListNode head) {
+        
+        boolean flag=true;
+        ListNode p=head;
+        ListNode q=head;
+        ListNode second=null;
+        
+        if(head!=null && head.next!=null)
+        {
+        
+        while(p!=null && p.next!=null)
+        {
+           
+             p=p.next.next;
+            
+            if(p==null) //break condition in case of even elements
+            {
+                 second=q.next;
+                 q.next=null;
+                break;
+            }
+            if(p.next==null) //break condition in case of odd elements
+            {
+               second=q.next.next;
+                q.next=null;
+                break;
+            }
+             q=q.next;
+        
+        }
+        
+        Solution sol=new Solution();
+        second=sol.reverseList(second);
+        
+        while(head!=null && second!=null)
+        {
+            if(head.val==second.val)
+        {
+           flag=true;
+        }
+            else
+            {
+                flag=false;
+                break;
+            }
+            
+            head=head.next;
+            second=second.next;
+        }
+        
+    }  
+        return flag;
+  
+        
+    }
+}

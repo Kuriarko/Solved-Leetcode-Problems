@@ -1,0 +1,40 @@
+/*Check if there is any loop in the given linkedlist if any return the node's
+address where loop begins.Else return null */
+
+
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        
+        ListNode fast=head;
+        ListNode slow=head;
+        
+        if(fast==null||fast.next==null)
+            return null;
+        
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+            
+            if(slow==fast)
+            {
+                fast=head;
+                break;
+            }
+            
+        }
+        if(fast!=null && fast.next!=null)
+        {
+            while(fast!=slow)
+        {
+            slow=slow.next;
+            fast=fast.next;
+        }
+        
+        return slow;
+        }
+        
+        return null;
+        
+    }
+}
