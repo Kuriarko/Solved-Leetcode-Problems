@@ -1,0 +1,69 @@
+
+
+//code
+class Solution 
+{
+    //Function to find minimum number of pages.
+    public static int findPages(int[]a,int n,int m)
+    {  int res = -1;
+       int low = a[0];
+       int high = 0;
+       for(int i=0; i<n; i++)
+       {
+           high = high+a[i];
+       }
+       
+       while(low <= high)
+       {
+           int mid = (low + high) / 2;
+           
+           if(isPossible(mid,a,n,m))
+           {
+               res = mid;
+               high = mid - 1;
+               
+           }
+           else
+           {
+               low = mid + 1;
+           }
+           
+       }
+       
+       return res;
+    }
+    
+    public static boolean isPossible(int mid, int[] a, int n, int m){
+        int stud_allocated = 1;
+        int pages_sum = 0;
+        
+        for(int j=0; j<n ; j++)
+        {
+            if(mid < a[j])
+            return false;
+           
+            if(pages_sum + a[j] <= mid)
+            {
+               
+                pages_sum += a[j];
+               
+            }
+            else
+            {
+                stud_allocated++;
+                 pages_sum = 0;
+                 pages_sum += a[j];
+                 
+            }
+            
+        }
+        
+        if(stud_allocated > m)
+        return false;
+        
+        return true;
+        
+        
+    }
+    
+};
