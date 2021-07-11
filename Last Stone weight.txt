@@ -1,0 +1,63 @@
+//Mycode
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        
+    Stack<Integer> stk = new Stack<>();
+        
+        Arrays.sort(stones);
+        
+        for(int i=0; i<stones.length; i++)
+        {
+            stk.push(stones[i]);
+        }
+        
+        while(stk.size() > 1)
+        {
+            int x = stk.pop();
+            int y = stk.pop();
+            
+            if(x > y)
+            {
+                stk.push(x-y);
+                Collections.sort(stk);
+            }
+        }
+        
+        if(stk.size() == 0)
+            return 0;
+        
+        else
+            return stk.peek();
+            
+        
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+//Most voted java code
+ public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+        for(int i : stones) {
+            queue.add(i);
+        }
+        int x;
+        int y;
+        while(queue.size() > 1) {
+            y = queue.poll();
+            x = queue.poll();
+            if(y > x) {
+                queue.offer(y-x);   
+            }
+        }
+        return queue.isEmpty() ? 0 : queue.poll();
+    }
