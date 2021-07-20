@@ -1,0 +1,76 @@
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        Node rotten = new Node(0,0,0);
+     
+        Queue<Node> queue = new LinkedList<>();
+        
+        for(int i=0; i < grid.length; i++)
+        {
+            for(int j=0; j < grid[0].length; j++)
+            {
+                if(grid[i][j] == 2)
+                    queue.add(new Node(0,i,j));
+            }
+        }
+        
+        while(queue.isEmpty() == false)
+        {
+              rotten = queue.poll();
+            
+            if(rotten.row - 1 >= 0 && grid[rotten.row - 1][rotten.col] == 1) //top
+            {
+                grid[rotten.row - 1][rotten.col] = 2;
+                queue.add(new Node(rotten.timestamp + 1, rotten.row - 1, rotten.col));
+            }
+                
+                
+            if(rotten.row + 1 < grid.length && grid[rotten.row + 1][rotten.col] == 1) //down
+            {
+                 grid[rotten.row + 1][rotten.col] = 2;
+                 queue.add(new Node(rotten.timestamp + 1, rotten.row + 1, rotten.col));
+            }   
+               
+            
+            if(rotten.col - 1 >=0 && grid[rotten.row][rotten.col - 1] == 1) //left
+                      {
+                          grid[rotten.row][rotten.col - 1] = 2;
+                            queue.add(new Node(rotten.timestamp + 1, rotten.row, rotten.col - 1)); 
+                      }
+              
+            
+        if(rotten.col+ 1 < grid[0].length && grid[rotten.row][rotten.col + 1] == 1) //right
+                      {
+                          grid[rotten.row][rotten.col + 1] = 2;
+                           queue.add(new Node(rotten.timestamp + 1, rotten.row, rotten.col + 1));
+                      }           
+                
+            
+           
+        }
+        
+        for(int k=0; k < grid.length; k++)
+        {
+            for(int l=0; l < grid[0].length; l++)
+            {
+                if(grid[k][l] == 1)
+                    return -1;
+                    
+            }
+        }
+        
+        return rotten.timestamp;
+        
+    }
+    
+    class Node{
+        
+        int timestamp, row, col;
+        
+        Node(int time, int i, int j)
+        {
+            timestamp = time;
+            row = i;
+            col = j;
+        }
+    }
+}

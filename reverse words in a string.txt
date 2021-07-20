@@ -1,0 +1,46 @@
+//Input: s = "the sky is blue"
+//Output: "blue is sky the"
+
+//code
+
+class Solution {
+    public String reverseWords(String s) {
+        
+        int start = 0;
+       
+        
+        String res = "";
+        
+        while(start < s.length())
+        {
+            while(start < s.length() && s.charAt(start) == ' ')
+                start++;
+            
+            if(start >= s.length())
+                break; 
+            
+            int end = start + 1;
+            
+            while(end < s.length() && s.charAt(end) != ' ')
+                end++;
+            
+            
+            String temp = s.substring(start,end);
+            
+          
+            
+            if(res.length() == 0)
+                res = res + temp;
+            
+            else
+                res = temp + " " + res;
+                
+            
+            start = end + 1;
+           
+        }
+       
+        return res;
+        
+    }
+}
