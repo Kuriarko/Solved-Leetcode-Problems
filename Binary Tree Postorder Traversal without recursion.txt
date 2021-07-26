@@ -1,0 +1,40 @@
+//Binary Tree Postorder Traversal without recursion implemented using 2 stacks
+
+//code
+
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        TreeNode curr = root;
+        
+        List<Integer> list = new ArrayList<>();
+        
+        if(root == null)return list;
+        
+        Stack<TreeNode> stk1 = new Stack<>();
+         Stack<TreeNode> stk2 = new Stack<>();
+        
+        stk1.push(curr);
+        
+        while(stk1.empty() == false)
+        {
+            TreeNode poppedNode = stk1.peek();
+            stk2.push(poppedNode);
+            stk1.pop();
+            
+            if(stk2.peek().left != null)
+                stk1.push(stk2.peek().left);
+            
+             if(stk2.peek().right != null)
+                stk1.push(stk2.peek().right);
+           
+        }
+        
+        while(stk2.empty() == false)
+        {
+            list.add(stk2.peek().val);
+            stk2.pop();
+        }
+        
+        return list;
+    }
+}

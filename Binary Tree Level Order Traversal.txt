@@ -1,0 +1,45 @@
+//Input: root = [3,9,20,null,null,15,7]
+//Output: [[3],[9,20],[15,7]]
+
+//code (Iterative solution)
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        
+   
+        if(root == null)return list;
+        
+        TreeNode curr = root;
+        
+        Queue<TreeNode> queue = new LinkedList<>();
+        
+        queue.add(curr);
+        
+        while(queue.isEmpty() == false)
+        {
+           List<Integer> sublist = new ArrayList<>(); 
+          int size = queue.size();
+            
+            while(size > 0)
+            {
+                TreeNode temp = queue.poll();
+                sublist.add(temp.val);
+                
+                if(temp.left != null)
+                    queue.add(temp.left);
+                
+                if(temp.right != null)
+                    queue.add(temp.right);
+                
+                size--;
+            }
+            
+            list.add(sublist);
+            
+        }
+        
+        return list;
+        
+    }
+}
