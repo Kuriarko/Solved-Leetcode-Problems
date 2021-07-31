@@ -1,0 +1,59 @@
+class Solution
+{
+    class HdNode
+    {
+        Node node;
+        int hd;
+        
+        HdNode(Node hdNode, int hd)
+        {
+            node = hdNode;
+            this.hd = hd;
+        }
+    }
+    
+    public ArrayList<Integer> topView(Node root)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        if(root == null)
+        return list;
+        
+        Queue<HdNode> queue = new LinkedList<>();
+        
+        Map<Integer,Node> map = new TreeMap<>();
+        
+        queue.add(new HdNode(root,0));
+        
+        while(queue.isEmpty() == false)
+        {
+            HdNode temp = queue.poll();
+            
+            if(map.containsKey(temp.hd) == false)
+            {
+                map.put(temp.hd,temp.node);
+            }
+            
+            if(temp.node.left != null)
+            {
+                queue.add(new HdNode(temp.node.left,temp.hd-1));
+            }
+            
+            if(temp.node.right != null)
+            {
+                queue.add(new HdNode(temp.node.right,temp.hd+1));
+            }
+           
+            
+        }
+        
+        for(Map.Entry<Integer,Node> entry : map.entrySet())
+        {
+            list.add(entry.getValue().data);
+        }
+        
+        return list;
+        
+        
+    }
+}

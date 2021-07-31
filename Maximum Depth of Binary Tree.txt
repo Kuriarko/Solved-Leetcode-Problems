@@ -1,0 +1,21 @@
+class Solution {
+    public int maxDepth(TreeNode root) {
+        
+        if(root == null)return 0;
+        
+        int depth = findDepth(root);
+        
+        return depth;
+        
+    }
+    
+    private int findDepth(TreeNode root)
+    {
+        if(root == null)
+            return 0;
+        
+       
+       return Math.max(findDepth(root.left),findDepth(root.right)) + 1; 
+        
+    }
+}
