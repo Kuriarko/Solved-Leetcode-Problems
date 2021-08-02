@@ -1,0 +1,26 @@
+class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        
+        if(root == null)
+            return 0;
+        
+       int DiaRoot = (findHeight(root.left) + findHeight(root.right) ) ; //passing through root
+        
+        int ldiameter = root.left == null ? 0 : diameterOfBinaryTree(root.left);
+        int rdiameter = root.right == null ? 0 : diameterOfBinaryTree(root.right);
+        
+        
+        
+    int DiaSub = Math.max(ldiameter,rdiameter);
+        
+        
+        return Math.max(DiaRoot,DiaSub);
+    }
+    
+    private int findHeight(TreeNode root)
+    {
+        if(root == null)return 0;
+        
+        return Math.max(findHeight(root.left),findHeight(root.right)) + 1;
+    }
+}

@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        
+      
+        if(root == null)
+            return true;
+        
+      int balncFact= Math.max(findHeight(root.left),findHeight(root.right)) -     Math.min(findHeight(root.left),findHeight(root.right));
+        
+        if(balncFact > 1)
+          return false;
+        
+        
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+    
+    private int findHeight(TreeNode root)
+    {
+        if(root == null)return 0;
+        
+        return Math.max(findHeight(root.left),findHeight(root.right)) + 1;
+    }
+}
