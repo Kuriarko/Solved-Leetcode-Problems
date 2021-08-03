@@ -1,0 +1,31 @@
+class Solution {
+    
+    int result = Integer.MIN_VALUE;
+  
+    public int maxPathSum(TreeNode root) {
+        
+       calcMaxPath(root);
+        
+        
+        return result;
+       
+    }
+    
+    private int calcMaxPath(TreeNode root){
+        if(root==null)return 0;
+        
+         int left = calcMaxPath(root.left);
+        
+        int right = calcMaxPath(root.right);
+        
+        int ms = Math.max(Math.max(left,right) + root.val , root.val);
+        
+        int m21 = Math.max((left + right + root.val),ms);
+        
+        result = Math.max(result,m21);        
+        
+        return ms;
+        
+        
+    }
+}
