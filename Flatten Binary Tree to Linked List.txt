@@ -1,0 +1,23 @@
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root == null)return;
+        
+        TreeNode leftSub = root.left;
+        TreeNode rightSub = root.right;
+        
+        root.left = null;
+        
+        flatten(leftSub);
+        flatten(rightSub);
+        
+        root.right = leftSub;
+        
+        TreeNode curr = root;
+        
+        while(curr.right != null)
+            curr = curr.right;
+        
+        curr.right = rightSub;
+        
+    }
+}
