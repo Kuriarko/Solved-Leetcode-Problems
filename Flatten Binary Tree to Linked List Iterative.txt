@@ -1,0 +1,27 @@
+//code (Iterative solution with O(1) space - Morris Traversal)
+
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root == null)return;
+        
+        while(root!=null)
+        {
+            if(root.left != null)
+            {
+                TreeNode tempLeft = root.left;
+                TreeNode curr = tempLeft;
+                
+                while(curr.right != null)
+                    curr = curr.right;
+                
+                curr.right = root.right;
+                
+                root.left = null;
+                
+                root.right = tempLeft;
+            }
+            
+            root = root.right;
+        }
+    }
+}
