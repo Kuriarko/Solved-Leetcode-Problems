@@ -1,0 +1,75 @@
+//Inorder predecessor for a given root would be the greatest(rightmost) element in the left subtree.
+//Inorder Successor for a given root would be the smallest(leftmost) element in right subtree.
+
+//The above would be true for all nodes of the tree except leaf nodes.For getting their predecessor and successor we have to store 
+values before making recursive calls.
+
+//For succesor of leafnode: Store the current node value before making a left call.
+
+//for predecessor of leafnode: Store the current node value before making a right call. 
+
+
+class GfG
+{
+    public static Node predecessor(Node root)
+    {
+        if(root == null)return null;
+        if(root.left != null)root = root.left;
+        while(root.right != null)
+        {
+            root = root.right;
+        }
+        
+        return root;
+    }
+    
+     public static Node successor(Node root)
+    {
+        if(root == null)return null;
+        if(root.right != null)root = root.right;
+        while(root.left != null)
+        {
+            root = root.left;
+        }
+        
+        return root;
+    }
+    public static void findPreSuc(Node root, Res p, Res s, int key)
+    {
+        if(root == null)return;
+        
+        if(root.data == key)
+        {
+            if(root.left != null)
+        {
+           p.pre =  predecessor(root);
+           s.pre =  predecessor(root);
+        }
+        
+        if(root.right != null)
+        {
+            p.succ = successor(root);
+            s.succ = successor(root);
+        }
+        
+        return;
+            
+        }
+        
+        else if(root.data > key)
+        {
+             p.succ = root;
+             s.succ = root;
+            findPreSuc(root.left,p,s,key);
+        }
+        
+        else if(root.data < key)
+        {
+             p.pre = root;
+             s.pre = root;
+           findPreSuc(root.right,p,s,key);  
+        }
+   
+       
+    }
+}

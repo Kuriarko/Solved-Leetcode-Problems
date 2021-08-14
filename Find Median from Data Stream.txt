@@ -1,0 +1,78 @@
+//optimal approach : we will use a maxHeap and a minHeap, maxHeap will store lefthalf and minHeap will store righthalf.
+
+//code
+class MedianFinder {
+
+    /** initialize your data structure here. */
+    
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    
+    
+    public MedianFinder() {
+        
+    }
+    
+    public void addNum(int num) {
+        if(maxHeap.size() == 0)
+        {
+            maxHeap.add(num);
+        }
+        
+        else if(maxHeap.size() == minHeap.size())
+        {
+            if(num > minHeap.peek())
+            {
+                int temp = minHeap.poll();
+                minHeap.add(num);
+                maxHeap.add(temp);
+            }
+            
+            else
+                maxHeap.add(num);
+        }
+        
+        else
+        {
+            if(minHeap.size() == 0)
+            {
+                if(num > maxHeap.peek())
+                    minHeap.add(num);
+                
+                else
+                {
+                    int temp = maxHeap.poll();
+                    maxHeap.add(num);
+                    minHeap.add(temp);
+                }
+            }
+            
+            else
+            {
+                if(num < maxHeap.peek())
+                {
+                    int temp = maxHeap.poll();
+                    maxHeap.add(num);
+                    minHeap.add(temp);
+                }
+                
+                else
+                    minHeap.add(num);
+            }
+        }
+    }
+    
+    public double findMedian() {
+        
+        if(maxHeap.size() == minHeap.size())
+        {
+            return ((double)maxHeap.peek() + (double)minHeap.peek())/ 2;
+            
+        }
+        
+        else
+            return  (double)maxHeap.peek();
+        
+       
+    }
+}
