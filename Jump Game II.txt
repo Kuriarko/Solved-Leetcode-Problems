@@ -1,0 +1,28 @@
+class Solution {
+    public int jump(int[] nums) {
+        int ladder = nums[0];
+        int steps = nums[0];
+        int jumps = nums.length > 1? 1:0;
+        
+        for(int i=1; i<nums.length; i++)
+        {
+            if(i == nums.length - 1)
+                break;
+            
+            if(nums[i] + i > ladder)
+            {
+                ladder = nums[i] + i;
+            }
+            
+            steps--;
+            
+            if(steps == 0)
+            {
+                jumps++;
+                steps = ladder - i;
+            }
+        }
+        
+        return jumps;
+    }
+}
