@@ -1,0 +1,49 @@
+class Solution {
+    public int calculate(String s) {
+        int ans = 0;
+        int prevDigit = 0;
+        char prevSymbol = '+';
+        int curr = 0;
+        
+        for(int i=0; i < s.length(); i++)
+        {
+            
+            if(Character.isDigit(s.charAt(i)))
+            {
+                curr = curr * 10 + Character.getNumericValue(s.charAt(i));
+                
+            }
+                
+            if(!Character.isDigit(s.charAt(i)) && s.charAt(i) != ' ' || i == s.length() - 1)
+            {
+                if(prevSymbol == '+'){
+                    ans = ans + prevDigit;
+                    prevDigit = curr;
+                }
+                
+                else if(prevSymbol == '-'){
+                    ans = ans + prevDigit;
+                    prevDigit = -curr;
+                }
+                
+                 else if(prevSymbol == '*'){
+                    prevDigit = prevDigit * curr;
+                }
+                
+                else{
+                    prevDigit = prevDigit / curr;
+                }
+                
+                prevSymbol = s.charAt(i);
+                curr = 0;
+            }
+
+            
+        
+        }
+        
+        ans = ans + prevDigit;
+        
+        return ans;
+    }
+}

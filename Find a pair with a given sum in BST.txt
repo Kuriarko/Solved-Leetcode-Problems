@@ -1,0 +1,26 @@
+//approach:- do inorder traversal,store every node value. after that do another traversal and check if key - root.val exist
+in the set or not.
+
+
+//code
+class Solution {
+    Set<Integer> set = new HashSet<>();
+    public boolean findTarget(TreeNode root, int k) {
+       
+        if(root == null)return false;
+        
+        return inorder(root,k);
+      
+    }
+   
+    private boolean inorder(TreeNode root, int k)
+    {
+        if(root == null)return false;
+        
+        if(set.contains(k - root.val))return true;
+        
+        set.add(root.val);
+        
+        return inorder(root.left,k) || inorder(root.right,k);
+    }
+}
