@@ -1,0 +1,42 @@
+class Solution
+{
+  
+   
+    public ArrayList<Integer> bfsOfGraph(int V,ArrayList<ArrayList<Integer>> adj)
+    {
+       ArrayList<Integer> res = new ArrayList<>();
+       
+       boolean[] visited = new boolean[V];
+       
+       Queue<Integer> queue = new LinkedList<>();
+       
+       queue.add(0);
+       visited[0] = true;
+   
+               
+               while(queue.isEmpty()== false)
+               {
+                   Integer temp = queue.poll();
+                   res.add(temp);
+                   
+                   for(Integer n: adj.get(temp))
+                   {
+                       if(visited[n] == false)
+                       {
+                           visited[n] = true;
+                           queue.add(n);
+                       }
+                   }
+               }
+           
+       
+       
+       return res;
+        
+    
+       
+    }
+    
+
+    
+}
