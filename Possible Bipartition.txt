@@ -1,0 +1,37 @@
+class Solution {
+    
+    Map<Integer, Integer> color;
+    public boolean possibleBipartition(int n, int[][] dislikes) {
+               if(dislikes.length==0) return true;
+        int[][] grid=new int[n][n];
+        
+        for(int[] i:dislikes){
+            grid[i[0]-1][i[1]-1]++;
+            grid[i[1]-1][i[0]-1]++;
+        }
+        color = new HashMap();
+        for (int node = 0; node < n; ++node){
+            if(!color.containsKey(node) && !dfs(node, 0,grid)){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    
+       public boolean dfs(int node,int c,int[][] grid){
+        if(color.containsKey(node)){
+            return color.get(node)==c;
+        }
+        
+        color.put(node,c);
+        int[] val=grid[node];
+        for(int i=0;i<val.length;i++){
+            if(val[i]==1 && !dfs(i,c^1,grid)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
