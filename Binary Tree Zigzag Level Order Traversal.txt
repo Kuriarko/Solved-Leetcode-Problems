@@ -1,0 +1,73 @@
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        
+        List<List<Integer>> res = new ArrayList<>();
+        
+        if(root == null)return res;
+        
+        Stack<TreeNode> stk1 = new Stack<>();
+        
+        Stack<TreeNode> stk2 = new Stack<>();
+        
+       
+        
+        stk1.push(root);
+        
+        while(!stk1.empty() || !stk2.empty())
+        {
+             List<Integer> level = new ArrayList<>();
+            while(!stk1.empty())
+            {
+                TreeNode poppedNode = stk1.pop();
+                
+                if(poppedNode.left != null)
+                    stk2.push(poppedNode.left);
+                
+                if(poppedNode.right != null)
+                    stk2.push(poppedNode.right);
+                
+                level.add(poppedNode.val);
+                
+                
+
+                
+                if(stk1.empty())
+                {
+                   res.add(level);
+                   
+
+                }
+            }
+            
+             List<Integer> level1 = new ArrayList<>();
+            
+            while(!stk2.empty())
+            {
+                
+       TreeNode poppedNode = stk2.pop();
+                
+                if(poppedNode.right != null)
+                    stk1.push(poppedNode.right);
+                
+                 if(poppedNode.left != null)
+                    stk1.push(poppedNode.left);
+                
+                 level1.add(poppedNode.val);
+                
+            
+                
+                if(stk2.empty())
+                {
+                   res.add(level1);
+                   
+
+                }
+                
+                
+            }
+        }
+        
+        return res;
+        
+    }
+}
