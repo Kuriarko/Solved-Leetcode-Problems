@@ -1,0 +1,30 @@
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        
+        List<Integer> res = new ArrayList<>();
+        
+        Queue<Integer> queue = new LinkedList<>();
+        
+        traversal(root,0,queue);
+        
+        while(queue.isEmpty() == false)
+        {
+            res.add(queue.poll());
+        }
+        
+        return res;
+        
+    }
+    
+    public void traversal(TreeNode node, int level, Queue<Integer> queue){
+        if(node == null)return;
+        
+        if(level == queue.size())
+            queue.offer(node.val);
+        
+        traversal(node.right, level+1, queue);
+        
+        traversal(node.left, level+1, queue);
+        
+    }
+}
