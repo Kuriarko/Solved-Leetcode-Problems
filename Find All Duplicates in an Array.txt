@@ -1,0 +1,64 @@
+//Time complexity: O(n) , space complexity: O(n)
+
+//code
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        
+        List<Integer> res = new ArrayList<>();
+        
+        Map<Integer,Integer> map = new HashMap<>();
+        
+        for(int i=0; i<nums.length; i++)
+        {
+            if(!map.containsKey(nums[i]))
+            {
+                map.put(nums[i],1);
+            }
+            
+            else
+            {
+                int count = map.get(nums[i]);
+                count = count + 1;
+                
+                map.replace(nums[i],count);
+            }
+        }
+        
+        for(Map.Entry entry : map.entrySet())
+        {
+            int count = (int)entry.getValue();
+            
+            if(count > 1)
+            {
+                res.add((int)entry.getKey());
+            }
+        }
+        
+        return res;
+    }
+}
+
+
+
+
+
+//Time complexity: O(n) , space complexity: O(1)
+
+
+//Code
+
+public class Solution {
+    // when find a number i, flip the number at position i-1 to negative. 
+    // if the number at position i-1 is already negative, i is the number that occurs twice.
+    
+    public List<Integer> findDuplicates(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; ++i) {
+            int index = Math.abs(nums[i])-1;
+            if (nums[index] < 0)
+                res.add(Math.abs(index+1));
+            nums[index] = -nums[index];
+        }
+        return res;
+    }
+}
